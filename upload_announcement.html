@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Announcement</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+</head>
+<body>
+    <textarea id="announcementText" rows="4" cols="50" placeholder="Write your announcement here"></textarea>
+    <button onclick="uploadAnnouncement()">Submit</button>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDZMISjUU7aL5B8UaQWP-ixPmaQbdFLw6g",
+            authDomain: "classpurposr.firebaseapp.com",
+            projectId: "classpurposr",
+            storageBucket: "classpurposr.appspot.com",
+            messagingSenderId: "815886984343",
+            appId: "1:815886984343:web:1d03566d8a3d1ec8ad75d2",
+            measurementId: "G-HEJ6HHW3NM"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+
+        function uploadAnnouncement(){
+            var announcementText = document.getElementById('announcementText').value;
+            var timestamp = new Date().getTime();
+            var announcementRef = database.ref('announcements/' + timestamp);
+            announcementRef.set(announcementText).then(function(){
+                console.log('Announcement uploaded successfully!');
+                document.getElementById('announcementText').value = '';
+            }).catch(function(error){
+                console.log('Error in uploading announcement: ', error);
+            });
+        }
+    </script><br>
+<a href="index.html">go home</a>
+</body>
+</html>

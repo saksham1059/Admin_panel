@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Syllabus</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+</head>
+<body>
+    <input type="file" id="fileButton" value="upload" multiple>
+    <button onclick="uploadFile()">Upload</button>
+    <progress value="0" max="100" id="uploader">0%</progress>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "upload-372ff.firebaseapp.com",
+            databaseURL: "https://upload-372ff-default-rtdb.firebaseio.com",
+            projectId: "upload-372ff",
+            storageBucket: "upload-372ff.appspot.com",
+            messagingSenderId: "967062218795",
+            appId: "1:967062218795:web:083e9c6a2ebdf2b7d8626e",
+            measurementId: "G-VBJ93FPBJ5"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var storage = firebase.storage();
+
+        function uploadFile(){
+            var uploader = document.getElementById('uploader');
+            var fileButton = document.getElementById('fileButton');
+            for(var i = 0; i < fileButton.files.length; i++) {
+                var file = fileButton.files[i];
+                var storageRef = storage.ref('syllabus/' + file.name);
+                var task = storageRef.put(file);
+
+                task.on('state_changed',
+
+                function progress(snapshot){
+                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    uploader.value = percentage;
+                },
+
+                function error(err){
+                    console.log('Error in uploading file: ', err);
+                },
+
+                function complete(){
+                    console.log('Upload completed!');
+                });
+            }
+        }
+    </script><br>
+<a href="index.html">go home</a>
+</body>
+</html>
