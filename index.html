@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Teacher Admin Panel</title>
+    <style>
+        h1 {
+            color: red;
+            font-size: 3em;
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .button-container a {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .button-container a:hover {
+            background-color: #0056b3;
+        }
+        @media (min-width: 768px) {
+            .button-container {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Teacher Admin Panel</h1>
+    <div class="button-container">
+        <a href="delete_uploaded_files.html" class="button">Delete Homework Files</a>
+        <a href="upload_datesheet.html" class="button">Add Datesheet</a>
+        <a href="upload_syllabus.html" class="button">Add Syllabus</a>
+        <a href="upload_announcement.html" class="button">Important Announcements</a>
+    </div>
+</body>
+</html>
